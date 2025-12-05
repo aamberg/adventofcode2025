@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace adventofcode2025
 {
-    internal class Day04
+    internal class Day04 : IDay
     {
         private int[,] gridPaper;
 
@@ -72,7 +72,7 @@ namespace adventofcode2025
                 }
             }
 
-            Console.WriteLine(countOfMovablePaper);
+            Console.WriteLine("Result Part1: "+countOfMovablePaper);
         }
 
         public void SolvePart2()
@@ -103,7 +103,7 @@ namespace adventofcode2025
                 }
             }
 
-            Console.WriteLine(countOfMovablePaper);
+            Console.WriteLine("Result Part2: "+countOfMovablePaper);
             drawPart02ToFile("files/FinalOutputDay04.txt");            
         }
 
