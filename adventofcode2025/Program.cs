@@ -29,8 +29,6 @@ static void Main()
     }
 
     var selectedDay = implementedDays[implementedDays.Length-1];
-    var b = Environment.GetEnvironmentVariables();
-    Console.WriteLine(Environment.GetEnvironmentVariable("DOTNET_MODIFIABLE_ASSEMBLIES"));
 
     if (Environment.GetEnvironmentVariable("DOTNET_MODIFIABLE_ASSEMBLIES") != "debug")
     {
@@ -48,6 +46,8 @@ static void Main()
 
         if (classType != null)
         {
+            Console.WriteLine("Results of " + selectedDay);
+            Console.WriteLine("");
             object instance = Activator.CreateInstance(classType);
             MethodInfo methodPart1 = classType.GetMethod("SolvePart1");
             methodPart1.Invoke(instance, null);
