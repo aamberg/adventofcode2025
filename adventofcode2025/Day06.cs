@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -76,7 +77,72 @@ namespace adventofcode2025
 
         public void SolvePart2()
         {
-            Console.WriteLine("Result Part2: ");
+            using StreamReader reader = new("files/Day06Input.txt");
+            string text = reader.ReadToEnd();
+            string[] lines = text.Split("\n");
+            var linesWithoutOperator = lines.SkipLast(1);
+
+            string operatorLine = lines[lines.Length-1];
+
+            int pointer = 0;
+            double finalResult = 0;
+
+            while (pointer < operatorLine.Length)
+            {
+                char curOperator = operatorLine[pointer];
+                int posNextOperator = pointer + 1;
+                bool foundOperator = false;
+                for (posNextOperator = pointer + 1; posNextOperator < operatorLine.Length; posNextOperator++)
+                {
+                    if (operatorLine[posNextOperator] == '+' || operatorLine[posNextOperator] == '*')
+                    {
+                        foundOperator = true;
+                        break;
+                    }
+                }
+
+                int maxPosition = posNextOperator - 2;
+                if (!foundOperator)
+                {
+                    maxPosition = posNextOperator - 1;
+                }
+
+                double tmpValue = 0;
+                for (int curPos = maxPosition; curPos >= pointer; curPos--)
+                {
+                    string rowValue = "";
+                    foreach (string line in linesWithoutOperator)
+                    {
+                        rowValue += line[curPos];
+                    }
+
+
+                    double parsedValue = double.Parse(rowValue);
+                    if (curPos == maxPosition)
+                    {
+                        tmpValue = parsedValue;
+                    }
+                    else
+                    {
+                        switch (curOperator.ToString())
+                        {
+                            case "+":
+                                tmpValue = tmpValue + parsedValue;
+                                break;
+
+                            case "*":
+                                tmpValue = tmpValue * parsedValue;
+                                break;
+                        }
+                    }
+                }
+
+                finalResult = finalResult + tmpValue;
+
+                pointer = posNextOperator;
+            }
+
+            Console.WriteLine("Result Part2: "+ finalResult);
         }
     }
 }
