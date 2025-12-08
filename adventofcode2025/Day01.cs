@@ -9,11 +9,9 @@ namespace adventofcode2025
 {
     internal class Day01 : IDay
     {
-        private int dialPosition = 0;
-
         public void SolvePart1()
         {
-            dialPosition = 50;
+            int dialPosition = 50;
             int CounterResult = 0;
             using StreamReader reader = new("files/Day01Input.txt");
             string text = reader.ReadToEnd();
@@ -25,7 +23,7 @@ namespace adventofcode2025
                 int amount = int.Parse(instruction.Substring(1));
 
                 amount = amount%100;
-                dialRotate(direction, amount);
+                dialPosition = dialRotate(dialPosition, direction, amount);
 
                 if (dialPosition == 0)
                 {
@@ -39,11 +37,42 @@ namespace adventofcode2025
 
         public void SolvePart2()
         {
-            Console.WriteLine("Result Part2: ");
+            int dialPosition = 50;
+            int CounterResult = 0;
+            using StreamReader reader = new("files/Day01Input.txt");
+            string text = reader.ReadToEnd();
+            string[] instructions = text.Split("\n");
+
+            foreach (string instruction in instructions)
+            {
+                string direction = instruction.Substring(0, 1);
+                int amount = int.Parse(instruction.Substring(1));
+
+                decimal fullRotates = amount / 100;
+                decimal fullRotateClicks = Math.Floor(fullRotates);
+
+                CounterResult = CounterResult + int.Parse(fullRotateClicks.ToString());
+
+                amount = amount % 100;
+                int newDialPosition = dialRotate(dialPosition, direction, amount);
+
+                if (direction == "R" && newDialPosition < dialPosition)
+                {
+                    CounterResult++;
+                }
+                else if (direction == "L" && dialPosition != 0 && (newDialPosition > dialPosition || newDialPosition == 0))
+                {
+                    CounterResult++;
+                }
+
+                dialPosition = newDialPosition;
+            }
+
+            Console.WriteLine("Result Part2: "+ CounterResult);
         }
 
 
-        private void dialRotate(string direction, int amount)
+        private int dialRotate(int dialPosition, string direction, int amount)
         {
             if (direction == "R")
             {
@@ -58,6 +87,7 @@ namespace adventofcode2025
                 }
             }
 
+            return dialPosition;
         }
     }
 }
