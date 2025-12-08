@@ -29,6 +29,7 @@ static void Main()
     }
 
     var selectedDay = implementedDays[implementedDays.Length-1];
+    selectedDay = "Day01";
 
     if (Environment.GetEnvironmentVariable("DOTNET_MODIFIABLE_ASSEMBLIES") != "debug")
     {
