@@ -12,7 +12,6 @@ namespace adventofcode2025
 
         public void SolvePart1()
         {
-            Console.Clear();
             fillTachyonGrid();
             int consoleLeftPos = Console.CursorLeft;
             int consoleTopPos = Console.CursorTop;
@@ -35,7 +34,10 @@ namespace adventofcode2025
 
         public void SolvePart2()
         {
-            Console.WriteLine("Result Part2: ");
+            fillTachyonGrid();
+            double result = startTachyonDimesionCounter();
+
+            Console.WriteLine("Result Part2: " + result);
         }
 
         private int startTachyon()
@@ -75,9 +77,65 @@ namespace adventofcode2025
             return counterBeamSplits;
         }
 
+        private double startTachyonDimesionCounter()
+        {
+            double counterDimensions = 0;
+            double[,] valuesOfField = new double[gridTachyon.GetLength(0), gridTachyon.GetLength(1)];
+            double valueOfField = 0;
+
+            for (int y = 0; y < gridTachyon.GetLength(0); y++)
+            {
+                for (int x = 0; x < gridTachyon.GetLength(1); x++)
+                {
+                    valueOfField = Math.Max(valuesOfField[y, x], 1);
+                    
+                    if ("S" == gridTachyon[y, x])
+                    {
+                        gridTachyon[y + 1, x] = "|";
+                    }
+                    else if ("|" == gridTachyon[y, x])
+                    {
+                        if (isPositionAvaible(y + 1, x) && gridTachyon[y + 1, x] == "^")
+                        {
+                            List<(int y, int x)> values = new List<(int y, int x)>();
+                            values.Add((y + 1, x - 1));
+                            values.Add((y + 1, x + 1));
+                            foreach (var (checkY, checkX) in values)
+                            {
+                                if (isPositionAvaible(checkY, checkX))
+                                {
+                                    if (gridTachyon[checkY, checkX] == "|")
+                                    {
+                                        valuesOfField[checkY, checkX] = Math.Max(valuesOfField[checkY, checkX], 1) + valueOfField;
+                                    }
+                                    else
+                                    {
+                                        valuesOfField[checkY, checkX] = valueOfField;
+                                    }
+
+                                    gridTachyon[checkY, checkX] = "|";
+                                }
+                            }
+                        }
+                        else if (isPositionAvaible(y + 1, x))
+                        {
+                            gridTachyon[y + 1, x] = "|";
+                            valuesOfField[y + 1, x] = Math.Max(valuesOfField[y + 1, x], 0) + valueOfField;
+                        }
+                        else
+                        {
+                            counterDimensions = counterDimensions + valueOfField;
+                        }
+                    }
+                }
+            }
+
+            return counterDimensions;
+        }
+
         private bool isPositionAvaible(int yPos, int xPos)
         {
-            return yPos > 0 && yPos < gridTachyon.GetLength(0) && xPos > 0 && xPos < gridTachyon.GetLength(1);
+            return yPos >= 0 && yPos < gridTachyon.GetLength(0) && xPos >= 0 && xPos < gridTachyon.GetLength(1);
         }
 
         private void fillTachyonGrid()
