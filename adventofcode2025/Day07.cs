@@ -29,7 +29,7 @@ namespace adventofcode2025
                 outputGridToConsole(100, true);
             }
 
-            Console.WriteLine("Result Part1: "+ result);
+            Console.WriteLine("Result Part1: " + result);
         }
 
         public void SolvePart2()
@@ -88,7 +88,7 @@ namespace adventofcode2025
                 for (int x = 0; x < gridTachyon.GetLength(1); x++)
                 {
                     valueOfField = Math.Max(valuesOfField[y, x], 1);
-                    
+
                     if ("S" == gridTachyon[y, x])
                     {
                         gridTachyon[y + 1, x] = "|";
@@ -187,7 +187,7 @@ namespace adventofcode2025
                         chr = " ";
                     }
 
-                        wholeLine = wholeLine + chr;
+                    wholeLine = wholeLine + chr;
                 }
 
                 var greetingsOutput = new Markup($"{wholeLine}\n");

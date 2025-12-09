@@ -17,7 +17,7 @@ namespace adventofcode2025
 
             List<(int xCord, int yCord, int zCord)> boxes = new List<(int xCord, int yCord, int zCord)>();
             List<(int indexLow, int indexHigh, double distance)> sorter = new List<(int indexLow, int indexHigh, double distance)>();
-            
+
             int counter = 0;
 
             foreach (string line in lines)

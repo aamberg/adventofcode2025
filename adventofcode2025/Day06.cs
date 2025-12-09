@@ -18,7 +18,7 @@ namespace adventofcode2025
             string text = reader.ReadToEnd();
 
             Regex trimmer = new Regex(@"\s\s+");
-            
+
             string[] lines = text.Split("\n");
 
             string cleanFirstLine = trimmer.Replace(lines[0], " ").Trim();
@@ -49,7 +49,7 @@ namespace adventofcode2025
                 string operation = grid[lines.Length - 1, curPosX];
                 double tmpVal = 0;
 
-                for (int curPosY = 0; curPosY < lines.Length-1; curPosY++)
+                for (int curPosY = 0; curPosY < lines.Length - 1; curPosY++)
                 {
                     if (curPosY == 0)
                     {
@@ -69,10 +69,10 @@ namespace adventofcode2025
                     }
                 }
 
-                finalResult = finalResult + tmpVal; 
+                finalResult = finalResult + tmpVal;
             }
 
-            Console.WriteLine("Result Part1: "+ finalResult);
+            Console.WriteLine("Result Part1: " + finalResult);
         }
 
         public void SolvePart2()
@@ -82,7 +82,7 @@ namespace adventofcode2025
             string[] lines = text.Split("\n");
             var linesWithoutOperator = lines.SkipLast(1);
 
-            string operatorLine = lines[lines.Length-1];
+            string operatorLine = lines[lines.Length - 1];
 
             int pointer = 0;
             double finalResult = 0;
@@ -116,7 +116,6 @@ namespace adventofcode2025
                         rowValue += line[curPos];
                     }
 
-
                     double parsedValue = double.Parse(rowValue);
                     if (curPos == maxPosition)
                     {
@@ -142,7 +141,7 @@ namespace adventofcode2025
                 pointer = posNextOperator;
             }
 
-            Console.WriteLine("Result Part2: "+ finalResult);
+            Console.WriteLine("Result Part2: " + finalResult);
         }
     }
 }

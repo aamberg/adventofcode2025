@@ -18,8 +18,6 @@ namespace adventofcode2025
             freshItems.Clear();
             freshItemRanges.Clear();
             using StreamReader reader = new("files/Day05Input.txt");
-
-            // Read the stream as a string.
             string text = reader.ReadToEnd();
             string[] lines = text.Split("\n");
 
@@ -51,7 +49,7 @@ namespace adventofcode2025
                 }
             }
 
-            Console.WriteLine("Result Part1: "+ freshItems.Count);
+            Console.WriteLine("Result Part1: " + freshItems.Count);
         }
 
         public void SolvePart2()
@@ -59,8 +57,6 @@ namespace adventofcode2025
             freshItems.Clear();
             freshItemRanges.Clear();
             using StreamReader reader = new("files/Day05Input.txt");
-
-            // Read the stream as a string.
             string text = reader.ReadToEnd();
             string[] lines = text.Split("\n");
 
@@ -90,7 +86,7 @@ namespace adventofcode2025
             optimizedFreshRanges.Add(freshItemRanges[0]);
 
             bool isFirst = true;
-            foreach (var (start, end) in freshItemRanges) 
+            foreach (var (start, end) in freshItemRanges)
             {
                 if (isFirst)
                 {
@@ -98,7 +94,7 @@ namespace adventofcode2025
                     continue;
                 }
 
-                var lastOptimizedRow = optimizedFreshRanges[optimizedFreshRanges.Count-1];
+                var lastOptimizedRow = optimizedFreshRanges[optimizedFreshRanges.Count - 1];
                 if (start <= lastOptimizedRow.to)
                 {
                     optimizedFreshRanges[optimizedFreshRanges.Count - 1] = (lastOptimizedRow.from, Math.Max(end, lastOptimizedRow.to));
@@ -124,9 +120,9 @@ namespace adventofcode2025
         private bool checkIfItemIsFresh(double item)
         {
             bool isFresh = false;
-            foreach (var (from, to) in freshItemRanges) 
+            foreach (var (from, to) in freshItemRanges)
             {
-                if (item >= from && item <=to)
+                if (item >= from && item <= to)
                 {
                     isFresh = true;
                     break;

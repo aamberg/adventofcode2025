@@ -18,12 +18,9 @@ namespace adventofcode2025
         private void FillgridFromFile()
         {
             using StreamReader reader = new("files/Day04Input.txt");
-
-            // Read the stream as a string.
             string text = reader.ReadToEnd();
             string[] lines = text.Split("\n");
             int yMax = lines.Length;
-            
 
             string line = lines[0];
             char[] chars = line.ToCharArray();
@@ -72,7 +69,7 @@ namespace adventofcode2025
                 }
             }
 
-            Console.WriteLine("Result Part1: "+countOfMovablePaper);
+            Console.WriteLine("Result Part1: " + countOfMovablePaper);
         }
 
         public void SolvePart2()
@@ -103,10 +100,9 @@ namespace adventofcode2025
                 }
             }
 
-            Console.WriteLine("Result Part2: "+countOfMovablePaper);
-            drawPart02ToFile("files/FinalOutputDay04.txt");            
+            Console.WriteLine("Result Part2: " + countOfMovablePaper);
+            drawPart02ToFile("files/FinalOutputDay04.txt");
         }
-
         private void drawPart02ToFile(string filename)
         {
             int rows = gridPaper.GetLength(0);
@@ -131,9 +127,9 @@ namespace adventofcode2025
         private int GetNumOfAdjacentPaper(int yPos, int xPos)
         {
             int numAdjacentPaper = 0;
-            for (int tmpY = yPos-1; tmpY <= yPos + 1; tmpY++)
+            for (int tmpY = yPos - 1; tmpY <= yPos + 1; tmpY++)
             {
-                for (int tmpX = xPos-1; tmpX <= xPos + 1; tmpX++)
+                for (int tmpX = xPos - 1; tmpX <= xPos + 1; tmpX++)
                 {
                     if (tmpY == yPos && tmpX == xPos)
                     {
@@ -146,7 +142,6 @@ namespace adventofcode2025
                     }
                 }
             }
-
 
             return numAdjacentPaper;
         }
@@ -161,7 +156,6 @@ namespace adventofcode2025
             {
                 value = gridPaper[yPos, xPos];
             }
-            
 
             return value;
         }
