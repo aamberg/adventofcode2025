@@ -2,6 +2,7 @@
 using adventofcode2025;
 using Spectre.Console;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Formats.Asn1;
 using System.Reflection;
 
@@ -47,13 +48,22 @@ static void Main()
 
         if (classType != null)
         {
+            var stopwatch = new Stopwatch();
+
             Console.WriteLine("Results of " + selectedDay);
             Console.WriteLine("");
             object instance = Activator.CreateInstance(classType);
             MethodInfo methodPart1 = classType.GetMethod("SolvePart1");
+            stopwatch.Start();
             methodPart1.Invoke(instance, null);
+            stopwatch.Stop();
+            Console.WriteLine("("+ stopwatch.ElapsedMilliseconds+"ms elapsed)\n");
+
+            stopwatch.Start();
             MethodInfo methodPart2 = classType.GetMethod("SolvePart2");
             methodPart2.Invoke(instance, null);
+            stopwatch.Stop();
+            Console.WriteLine("(" + stopwatch.ElapsedMilliseconds + "ms elapsed)\n");
         }
     }
 }
