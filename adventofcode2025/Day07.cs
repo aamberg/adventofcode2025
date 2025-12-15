@@ -1,8 +1,4 @@
 ﻿using Spectre.Console;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace adventofcode2025
 {
@@ -17,7 +13,7 @@ namespace adventofcode2025
             int consoleTopPos = Console.CursorTop;
             if (Environment.GetEnvironmentVariable("DOTNET_MODIFIABLE_ASSEMBLIES") != "debug")
             {
-                outputGridToConsole(0);
+                //outputGridToConsole(0);
             }
 
             int result = startTachyon();
@@ -26,7 +22,7 @@ namespace adventofcode2025
             {
                 Console.CursorLeft = consoleLeftPos;
                 Console.CursorTop = consoleTopPos;
-                outputGridToConsole(100, true);
+                //outputGridToConsole(100, true);
             }
 
             Console.WriteLine("Result Part1: " + result);

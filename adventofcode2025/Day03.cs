@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Metrics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace adventofcode2025
+﻿namespace adventofcode2025
 {
     internal class Day03 : IDay
     {
