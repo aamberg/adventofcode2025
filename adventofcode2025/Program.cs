@@ -12,6 +12,12 @@ Main();
 
 static void Main()
 {
+    showWelcome();
+}
+
+
+static void showWelcome()
+{
     var greetingsOutput = new Panel(new Markup($":christmas_tree: {xmasPrinter("Advent of Code 2025")} :christmas_tree: "))
         .BorderColor(Color.Red);
     AnsiConsole.Write(greetingsOutput);
@@ -29,7 +35,7 @@ static void Main()
         implementedDays[x.index] = dayClassname;
     }
 
-    var selectedDay = implementedDays[implementedDays.Length-1];
+    var selectedDay = implementedDays[implementedDays.Length - 1];
     //selectedDay = "Day03";
 
     if (Environment.GetEnvironmentVariable("DOTNET_MODIFIABLE_ASSEMBLIES") != "debug")
@@ -57,7 +63,7 @@ static void Main()
             stopwatch.Start();
             methodPart1.Invoke(instance, null);
             stopwatch.Stop();
-            Console.WriteLine("("+ stopwatch.ElapsedMilliseconds+"ms elapsed)\n");
+            Console.WriteLine("(" + stopwatch.ElapsedMilliseconds + "ms elapsed)\n");
 
             stopwatch.Start();
             MethodInfo methodPart2 = classType.GetMethod("SolvePart2");
@@ -65,7 +71,12 @@ static void Main()
             stopwatch.Stop();
             Console.WriteLine("(" + stopwatch.ElapsedMilliseconds + "ms elapsed)\n");
         }
+
+        Console.WriteLine("Press any Key to go back\n");
     }
+
+    var key = Console.ReadKey();
+    showWelcome();
 }
 
 static string xmasPrinter(string input)
