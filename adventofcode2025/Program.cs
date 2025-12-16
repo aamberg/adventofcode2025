@@ -73,9 +73,10 @@ static void showWelcome()
         }
 
         Console.WriteLine("Press any Key to go back\n");
-    }
 
-    var key = Console.ReadKey();
+        var key = Console.ReadKey();
+    }
+    
     showWelcome();
 }
 
