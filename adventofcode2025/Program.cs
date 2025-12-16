@@ -72,12 +72,16 @@ static void showWelcome()
             Console.WriteLine("(" + stopwatch.ElapsedMilliseconds + "ms elapsed)\n");
         }
 
+        
+    }
+
+    if (Environment.GetEnvironmentVariable("DOTNET_MODIFIABLE_ASSEMBLIES") != "debug")
+    {
         Console.WriteLine("Press any Key to go back\n");
 
         var key = Console.ReadKey();
+        showWelcome();
     }
-    
-    showWelcome();
 }
 
 static string xmasPrinter(string input)
