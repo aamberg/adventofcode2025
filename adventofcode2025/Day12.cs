@@ -26,7 +26,43 @@ namespace adventofcode2025
 
         public void SolvePart1()
         {
-            using StreamReader reader = new("files/TestDay12Input.txt");
+            initStuff();
+            int rowsFitted = 0;
+
+            foreach (QuizRow row in quizRows)
+            {
+                if (stupidSolverCanRowFitAllItems(row))
+                {
+                    rowsFitted++;
+                }
+            }
+
+            Console.WriteLine("Result Part1: " + rowsFitted);
+        }
+
+        private bool stupidSolverCanRowFitAllItems(QuizRow row)
+        {
+            // resize grid to %3 by %3
+            double itemsPerRow = Math.Floor((double)row.dimensionX / 3);
+            double itemsMultiplier = Math.Floor((double)row.dimensionY / 3);
+
+            double totalItemsToPack = 0;
+            foreach (int tmpCounter in row.counters)
+            {
+                totalItemsToPack += tmpCounter;
+            }
+
+            return (totalItemsToPack < (itemsPerRow * itemsMultiplier));
+        }
+
+        public void SolvePart2()
+        {
+            Console.WriteLine("Result Part1: ");
+        }
+
+        private void initStuff()
+        {
+            using StreamReader reader = new("files/Day12Input.txt");
             string text = reader.ReadToEnd();
             string[] lines = text.Split("\n");
 
@@ -83,14 +119,6 @@ namespace adventofcode2025
                     tmpGrid.Add(line);
                 }
             }
-
-
-            Console.WriteLine("Result Part1: ");
-        }
-
-        public void SolvePart2()
-        {
-            Console.WriteLine("Result Part1: ");
         }
     }
 }
