@@ -42,7 +42,6 @@ namespace adventofcode2025
 
         private bool stupidSolverCanRowFitAllItems(QuizRow row)
         {
-            // resize grid to %3 by %3
             double itemsPerRow = Math.Floor((double)row.dimensionX / 3);
             double itemsMultiplier = Math.Floor((double)row.dimensionY / 3);
 
@@ -52,7 +51,9 @@ namespace adventofcode2025
                 totalItemsToPack += tmpCounter;
             }
 
-            return (totalItemsToPack < (itemsPerRow * itemsMultiplier));
+            //Console.WriteLine("Row: (" + row.dimensionX + "x" + row.dimensionY + ") " + string.Join(", ", row.counters.ToArray()) + " => Total Space:" + (row.dimensionX * row.dimensionY) + " - Total MaxItems:" + (itemsPerRow * itemsMultiplier) + " - Max Needed:" + totalItemsToPack);
+
+            return (totalItemsToPack <= (itemsPerRow * itemsMultiplier));
         }
 
         public void SolvePart2()
